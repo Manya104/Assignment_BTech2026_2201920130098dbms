@@ -1,0 +1,12 @@
+WITH cte AS (
+    SELECT managerId AS id, COUNT(*) AS count
+    FROM Employee
+    WHERE managerId IS NOT NULL
+    GROUP BY managerId
+)
+SELECT e.name
+FROM Employee e
+JOIN cte ON e.id = cte.id
+WHERE cte.count >= 5;
+
+explanation:
