@@ -1,0 +1,19 @@
+# Write your MySQL query statement below
+select q.person_name
+from Queue q
+join Queue r
+on q.turn>=r.turn
+group by q.turn
+having sum(r.weight) <=1000
+order by q.turn desc
+limit 1;
+
+So we are actually joining the turn with its every lesser and equal turn , such that we could get the sequence from 1-n for turns
+
+next we are grouping by q.turn such that the weight could be calculated for sequencial turns one with next , next.next
+
+we are retrieving the sum(weight) , such that the one whose turn satisfies the condition can be fetched .
+
+ordering by highest to lowest turn cause we already got the sum(weight)<=1000 .
+
+limiting the value to 1 , we could find the last person.
