@@ -1,0 +1,11 @@
+SELECT r.Department, r.Employee,r.Salary FROM 
+(SELECT 
+    d.name Department,
+    e.name Employee,
+    e.salary Salary,
+    DENSE_RANK() OVER(PARTITION BY d.id ORDER BY e.salary DESC) rn
+FROM Employee e
+JOIN Department d
+on e.departmentID = d.id) r
+WHERE r.rn<=3
+ORDER BY r.Department ASC
